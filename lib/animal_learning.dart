@@ -24,6 +24,10 @@ class _AnimalsLearningScreenState extends State<AnimalsLearningScreen>
     {"name": "Elephant", "image": "assets/elephant.png"},
     {"name": "Dog", "image": "assets/dog.png"},
     {"name": "Cat", "image": "assets/cat.png"},
+    {"name": "Bird", "image": "assets/bird.jpg"},
+    {"name": "Horse", "image": "assets/horse.jpg"},
+    {"name": "Monkey", "image": "assets/monkey.jpg"},
+    {"name": "Tiger", "image": "assets/tiger.jpg"}
   ];
 
   int currentIndex = 0; // الفهرس الحالي للحيوان
@@ -107,6 +111,7 @@ class _AnimalsLearningScreenState extends State<AnimalsLearningScreen>
     String animalImage = animals[currentIndex]['image']!;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('تعلم أسماء الحيوانات'),
       ),

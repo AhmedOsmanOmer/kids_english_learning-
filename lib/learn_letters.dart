@@ -21,11 +21,112 @@ class _LettersLearningScreenState extends State<LettersLearningScreen>
 
   // قائمة الأحرف مع الكلمات المرتبطة وصورها
   List<Map<String, String>> letters = [
-    {"letter": "A", "word": "  Apple", "image": "assets/apple.png"},
-    {"letter": "B", "word": "  Ball", "image": "assets/ball.png"},
-    {"letter": "C", "word": "  Cat", "image": "assets/cat.png"},
-    {"letter": "D", "word": "  Dog", "image": "assets/dog.png"},
-    {"letter": "E", "word": "  Elephant", "image": "assets/elephant.png"},
+    {
+      "letter": "A",
+      "word": "Apple",
+    },
+    {
+      "letter": "B",
+      "word": "Ball",
+    },
+    {
+      "letter": "C",
+      "word": "Cat",
+    },
+    {
+      "letter": "D",
+      "word": "Dog",
+    },
+    {
+      "letter": "E",
+      "word": "Elephant",
+    },
+
+    // الحروف الأبجدية المتبقية
+    {
+      "letter": "F",
+      "word": "Fish",
+    },
+    {
+      "letter": "G",
+      "word": "Giraffe",
+    },
+    {
+      "letter": "H",
+      "word": "Hat",
+    },
+    {
+      "letter": "I",
+      "word": "lizard",
+    },
+    {
+      "letter": "J",
+      "word": "Juice",
+    },
+    {
+      "letter": "K",
+      "word": "،Kangaroo",
+    },
+    {
+      "letter": "L",
+      "word": "Lamp",
+    },
+    {
+      "letter": "M",
+      "word": "Monkey",
+    },
+    {
+      "letter": "N",
+      "word": "Nose",
+    },
+    {
+      "letter": "O",
+      "word": "Orange",
+    },
+    {
+      "letter": "P",
+      "word": "Penguin",
+    },
+    {
+      "letter": "Q",
+      "word": "Quail",
+    },
+    {
+      "letter": "R",
+      "word": "Rabbit",
+    },
+    {
+      "letter": "S",
+      "word": "Sun",
+    },
+    {
+      "letter": "T",
+      "word": "Tree",
+    },
+    {
+      "letter": "U",
+      "word": "Unicorn",
+    },
+    {
+      "letter": "V",
+      "word": "Violin",
+    },
+    {
+      "letter": "W",
+      "word": "Watch",
+    },
+    {
+      "letter": "X",
+      "word": "Xerus",
+    },
+    {
+      "letter": "Y",
+      "word": "Yo Yo",
+    },
+    {
+      "letter": "Z",
+      "word": "Zebra",
+    }
   ];
 
   int currentIndex = 0; // الفهرس الحالي للحرف
@@ -108,9 +209,9 @@ class _LettersLearningScreenState extends State<LettersLearningScreen>
   Widget build(BuildContext context) {
     String letter = letters[currentIndex]['letter']!;
     String word = letters[currentIndex]['word']!;
-    String image = letters[currentIndex]['image']!;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('تعلم الأحرف'),
       ),
@@ -132,7 +233,7 @@ class _LettersLearningScreenState extends State<LettersLearningScreen>
               FadeTransition(
                 opacity: _fadeInAnimation,
                 child: Image.asset(
-                  image,
+                  'assets/$letter.png',
                   width: 150,
                   height: 150,
                 ),

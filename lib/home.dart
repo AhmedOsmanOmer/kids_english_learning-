@@ -14,6 +14,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text(
           'تعلم اللغة الانجليزية',
@@ -68,7 +69,7 @@ class HomeScreen extends StatelessWidget {
               context: context,
               icon: Icons.translate,
               color: Colors.indigo,
-              label: 'تعلم الأفعال والضمائر',
+              label: 'تعلم الأفعال ',
               screen: VerbsAndPronounsLearningScreen(),
             ),
             _buildGridItem(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart'; // مكتبة لتحويل النص إلى كلام
-import 'package:speech_to_text/speech_to_text.dart' as stt; // مكتبة لتحويل الكلام إلى نص
+import 'package:speech_to_text/speech_to_text.dart'
+    as stt; // مكتبة لتحويل الكلام إلى نص
 
 class NumbersLearningScreen extends StatefulWidget {
   const NumbersLearningScreen({super.key});
@@ -19,16 +20,26 @@ class _NumbersLearningScreenState extends State<NumbersLearningScreen>
   late Animation<double> _fadeInAnimation;
 
   List numbers = [
-    {"number": "One", "image": "1"},
-    {"number": "Two", "image": "2"},
-    {"number": "Three", "image": "3"},
-    {"number": "Four", "image": "4"},
-    {"number": "Five", "image": "5"},
-    {"number": "Six", "image": "6"},
-    {"number": "Seven", "image": "7"},
-    {"number": "Eight", "image": "8"},
-    {"number": "Nine", "image": "9"},
-    {"number": "Ten", "image": "10"},
+    {"number": "1", "image": "assets/1.png"},
+    {"number": "2", "image": "assets/2.png"},
+    {"number": "3", "image": "assets/3.png"},
+    {"number": "4", "image": "assets/4.png"},
+    {"number": "5", "image": "assets/5.png"},
+    {"number": "6", "image": "assets/6.png"},
+    {"number": "7", "image": "assets/7.png"},
+    {"number": "8", "image": "assets/8.png"},
+    {"number": "9", "image": "assets/9.png"},
+    {"number": "10", "image": "assets/10.png"},
+    {"number": "11", "image": "assets/11.png"},
+    {"number": "12", "image": "assets/12.png"},
+    {"number": "13", "image": "assets/13.png"},
+    {"number": "14", "image": "assets/14.png"},
+    {"number": "15", "image": "assets/15.png"},
+    {"number": "16", "image": "assets/16.png"},
+    {"number": "17", "image": "assets/17.png"},
+    {"number": "18", "image": "assets/18.png"},
+    {"number": "19", "image": "assets/19.png"},
+    {"number": "20", "image": "assets/20.png"},
   ];
 
   int currentIndex = 0; // الفهرس الحالي للرقم
@@ -100,7 +111,8 @@ class _NumbersLearningScreenState extends State<NumbersLearningScreen>
   void _nextNumber() {
     setState(() {
       _stopListening();
-      currentIndex = (currentIndex + 1) % numbers.length; // الانتقال بين الأرقام
+      currentIndex =
+          (currentIndex + 1) % numbers.length; // الانتقال بين الأرقام
       feedback = ""; // إعادة ضبط الملاحظات
       _animationController.reset(); // إعادة تشغيل الرسوم المتحركة
       _animationController.forward();
@@ -113,6 +125,7 @@ class _NumbersLearningScreenState extends State<NumbersLearningScreen>
     String image = numbers[currentIndex]['image']!;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('تعلم الأرقام'),
       ),
@@ -129,27 +142,28 @@ class _NumbersLearningScreenState extends State<NumbersLearningScreen>
                 valueColor: const AlwaysStoppedAnimation<Color>(Colors.blue),
                 minHeight: 8,
               ),
-              const SizedBox(height: 20),
+              /*  const SizedBox(height: 20),
               // عرض صورة الرقم مع الرسوم المتحركة
               FadeTransition(
                 opacity: _fadeInAnimation,
                 child: Text(
-                  image,
-                  style: const TextStyle(fontSize: 50),
+                  'assets/$image.png',
                 ),
-              ),
+              ), */
               const SizedBox(height: 20),
               // عرض الرقم
               Text(
                 number,
-                style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 20),
               // زر لنطق الرقم
               ElevatedButton(
                 onPressed: () => _speak(number),
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
@@ -164,7 +178,8 @@ class _NumbersLearningScreenState extends State<NumbersLearningScreen>
               ElevatedButton(
                 onPressed: isListening ? _stopListening : _startListening,
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
@@ -182,7 +197,8 @@ class _NumbersLearningScreenState extends State<NumbersLearningScreen>
                   feedback,
                   style: TextStyle(
                     fontSize: 24,
-                    color: feedback.contains("أحسنت") ? Colors.green : Colors.red,
+                    color:
+                        feedback.contains("أحسنت") ? Colors.green : Colors.red,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -192,7 +208,8 @@ class _NumbersLearningScreenState extends State<NumbersLearningScreen>
               ElevatedButton(
                 onPressed: _nextNumber,
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),

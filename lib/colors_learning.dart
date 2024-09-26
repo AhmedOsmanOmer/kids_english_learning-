@@ -24,6 +24,12 @@ class _ColorsLearningScreenState extends State<ColorsLearningScreen>
     {"name": "Green", "color": Colors.green},
     {"name": "Blue", "color": Colors.blue},
     {"name": "Yellow", "color": Colors.yellow},
+    {"name": "Orange", "color": Colors.orange},
+    {"name": "Purple", "color": Colors.purple},
+    {"name": "Pink", "color": Colors.pink},
+    {"name": "Brown", "color": Colors.brown},
+    {"name": "Black", "color": Colors.black},
+    {"name": "White", "color": Colors.white},
   ];
 
   int currentIndex = 0; // الفهرس الحالي للون
@@ -106,6 +112,8 @@ class _ColorsLearningScreenState extends State<ColorsLearningScreen>
     Color colorValue = colors[currentIndex]['color']!;
 
     return Scaffold(
+            backgroundColor: Colors.white,
+
       appBar: AppBar(
         title: const Text('تعلم أسماء الألوان'),
       ),

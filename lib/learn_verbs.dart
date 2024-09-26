@@ -22,12 +22,19 @@ class _VerbsAndPronounsLearningScreenState
   late Animation<double> _fadeInAnimation;
 
   List<Map<String, String>> items = [
+    // أفعال
     {"type": "verb", "word": "Run", "translation": "يجري"},
+    {"type": "verb", "word": "Jump", "translation": "يقفز"},
     {"type": "verb", "word": "Eat", "translation": "يأكل"},
     {"type": "verb", "word": "Sleep", "translation": "ينام"},
-    {"type": "pronoun", "word": "I", "translation": "أنا"},
-    {"type": "pronoun", "word": "You", "translation": "أنت"},
-    {"type": "pronoun", "word": "We", "translation": "نحن"},
+    {"type": "verb", "word": "Drink", "translation": "يشرب"},
+    {"type": "verb", "word": "Read", "translation": "يقرأ"},
+    {"type": "verb", "word": "Write", "translation": "يكتب"},
+    {"type": "verb", "word": "Sing", "translation": "يغني"},
+    {"type": "verb", "word": "Play", "translation": "يلعب"},
+    {"type": "verb", "word": "Swim", "translation": "يسبح"},
+    {"type": "verb", "word": "Laugh", "translation": "يضحك"},
+    {"type": "verb", "word": "Cry", "translation": "يبكي"},
   ];
 
   int currentIndex = 0; // الفهرس الحالي
@@ -113,12 +120,13 @@ class _VerbsAndPronounsLearningScreenState
     String translation = items[currentIndex]['translation']!;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('تعلم الأفعال والضمائر'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Center(
+        child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -128,6 +136,16 @@ class _VerbsAndPronounsLearningScreenState
                 backgroundColor: Colors.grey[300],
                 valueColor: const AlwaysStoppedAnimation<Color>(Colors.blue),
                 minHeight: 8,
+              ),
+              const SizedBox(height: 20),
+              // عرض نوع الكلمة (فعل أو ضمير)
+              FadeTransition(
+                opacity: _fadeInAnimation,
+                child: Image.asset(
+                  width: 230,
+                  height: 230,
+                  'assets/${word.toLowerCase()}.jpg',
+                ),
               ),
               const SizedBox(height: 20),
               // عرض نوع الكلمة (فعل أو ضمير)

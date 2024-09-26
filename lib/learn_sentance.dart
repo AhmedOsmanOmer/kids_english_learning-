@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tts/flutter_tts.dart'; // مكتبة لتحويل النص إلى كلام
-import 'package:speech_to_text/speech_to_text.dart'
-    as stt; // مكتبة لتحويل الكلام إلى نص
+import 'package:flutter_tts/flutter_tts.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 class SentencesLearningScreen extends StatefulWidget {
   const SentencesLearningScreen({super.key});
@@ -13,28 +12,47 @@ class SentencesLearningScreen extends StatefulWidget {
 
 class _SentencesLearningScreenState extends State<SentencesLearningScreen>
     with SingleTickerProviderStateMixin {
-  FlutterTts? flutterTts; // تحويل النص إلى كلام
-  stt.SpeechToText? speechToText; // تحويل الكلام إلى نص
+  FlutterTts? flutterTts;
+  stt.SpeechToText? speechToText;
   bool isListening = false;
-  String feedback = ""; // ملاحظات تصحيح النطق
+  String feedback = "";
   late AnimationController _animationController;
   late Animation<double> _fadeInAnimation;
 
-  List<String> sentences = [
-    "I have a cat.",
-    "The sun is bright.",
-    "She loves to read.",
-    "They play football.",
-    "We are going to school.",
+  List<Map<String, String>> sentences = [
+    {"sentence": "I have a cat.", "translation": "لدي قطة"},
+    {"sentence": "The sun is bright.", "translation": "الشمس مشرقة"},
+    {
+      "sentence": "She likes to read books.",
+      "translation": "هي تحب قراءة الكتب"
+    },
+    {"sentence": "He is playing with a ball.", "translation": "هو يلعب بالكرة"},
+    {
+      "sentence": "We are going to the park.",
+      "translation": "نحن ذاهبون إلى الحديقة"
+    },
+    {"sentence": "The sky is blue.", "translation": "السماء زرقاء"},
+    {"sentence": "They are eating lunch.", "translation": "هم يتناولون الغداء"},
+    {"sentence": "The dog is barking.", "translation": "الكلب ينبح"},
+    {"sentence": "I can jump high.", "translation": "أستطيع القفز عالياً"},
+    {
+      "sentence": "It is raining outside.",
+      "translation": "إنها تمطر في الخارج"
+    },
+    {"sentence": "She has a red hat.", "translation": "لديها قبعة حمراء"},
+    {"sentence": "The bird is singing.", "translation": "العصفور يغني"},
+    {"sentence": "He is riding a bike.", "translation": "هو يركب الدراجة"},
+    {"sentence": "We are happy today.", "translation": "نحن سعداء اليوم"},
+    {"sentence": "The tree is tall.", "translation": "الشجرة طويلة"},
   ];
 
-  int currentIndex = 0; // الفهرس الحالي للجملة
+  int currentIndex = 0;
 
   @override
   void initState() {
     super.initState();
-    flutterTts = FlutterTts(); // تهيئة TTS
-    speechToText = stt.SpeechToText(); // تهيئة Speech-to-Text
+    flutterTts = FlutterTts();
+    speechToText = stt.SpeechToText();
 
     _animationController = AnimationController(
       vsync: this,
@@ -44,7 +62,7 @@ class _SentencesLearningScreenState extends State<SentencesLearningScreen>
       parent: _animationController,
       curve: Curves.easeIn,
     );
-    _animationController.forward(); // بدء الرسوم المتحركة
+    _animationController.forward();
   }
 
   @override
@@ -53,14 +71,12 @@ class _SentencesLearningScreenState extends State<SentencesLearningScreen>
     super.dispose();
   }
 
-  // نطق الجملة باستخدام TTS
   Future<void> _speak(String sentence) async {
     await flutterTts!.setLanguage("en-US");
     await flutterTts!.setSpeechRate(0.5);
     await flutterTts!.speak(sentence);
   }
 
-  // بدء الاستماع لتحليل نطق الطفل
   void _startListening() async {
     bool available = await speechToText!.initialize();
     if (available) {
@@ -75,15 +91,13 @@ class _SentencesLearningScreenState extends State<SentencesLearningScreen>
     }
   }
 
-  // إيقاف الاستماع
   void _stopListening() {
     setState(() => isListening = false);
     speechToText!.stop();
   }
 
-  // مقارنة النطق بالنطق الصحيح
   String _checkPronunciation(String spokenSentence) {
-    String correctSentence = sentences[currentIndex];
+    String correctSentence = sentences[currentIndex]['sentence']!;
     if (spokenSentence.toLowerCase() == correctSentence.toLowerCase()) {
       _stopListening();
       return "أحسنت! نطقك صحيح.";
@@ -93,23 +107,22 @@ class _SentencesLearningScreenState extends State<SentencesLearningScreen>
     }
   }
 
-  // الانتقال إلى الجملة التالية
   void _nextSentence() {
     setState(() {
       _stopListening();
-      currentIndex =
-          (currentIndex + 1) % sentences.length; // الانتقال بين الجمل
-      feedback = ""; // إعادة ضبط الملاحظات
+      currentIndex = (currentIndex + 1) % sentences.length;
+      feedback = "";
       _animationController.reset();
-      _animationController.forward(); // تشغيل الرسوم المتحركة مرة أخرى
+      _animationController.forward();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    String sentence = sentences[currentIndex];
+    String sentence = sentences[currentIndex]['sentence']!;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('تعلم الجمل البسيطة'),
       ),
@@ -119,7 +132,6 @@ class _SentencesLearningScreenState extends State<SentencesLearningScreen>
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              // Progress bar to show current progress
               LinearProgressIndicator(
                 value: (currentIndex + 1) / sentences.length,
                 backgroundColor: Colors.grey[300],
@@ -127,7 +139,6 @@ class _SentencesLearningScreenState extends State<SentencesLearningScreen>
                 minHeight: 8,
               ),
               const SizedBox(height: 20),
-              // عرض الجملة مع الرسوم المتحركة
               FadeTransition(
                 opacity: _fadeInAnimation,
                 child: Padding(
@@ -141,7 +152,6 @@ class _SentencesLearningScreenState extends State<SentencesLearningScreen>
                 ),
               ),
               const SizedBox(height: 20),
-              // زر لنطق الجملة
               ElevatedButton(
                 onPressed: () => _speak(sentence),
                 style: ElevatedButton.styleFrom(
@@ -157,7 +167,6 @@ class _SentencesLearningScreenState extends State<SentencesLearningScreen>
                 ),
               ),
               const SizedBox(height: 20),
-              // زر للبدء في تصحيح النطق
               ElevatedButton(
                 onPressed: isListening ? _stopListening : _startListening,
                 style: ElevatedButton.styleFrom(
@@ -173,7 +182,6 @@ class _SentencesLearningScreenState extends State<SentencesLearningScreen>
                 ),
               ),
               const SizedBox(height: 20),
-              // عرض ملاحظات تصحيح النطق مع التفاعل
               AnimatedContainer(
                 duration: const Duration(milliseconds: 500),
                 child: Text(
@@ -187,7 +195,6 @@ class _SentencesLearningScreenState extends State<SentencesLearningScreen>
                 ),
               ),
               const SizedBox(height: 20),
-              // زر للانتقال إلى الجملة التالية
               ElevatedButton(
                 onPressed: _nextSentence,
                 style: ElevatedButton.styleFrom(

@@ -20,10 +20,40 @@ class _WordLearningScreenState extends State<WordLearningScreen>
   late Animation<double> _fadeInAnimation;
 
   List<Map<String, String>> words = [
-    {"word": "Apple", "image": "assets/apple.png"},
-    {"word": "Banana", "image": "assets/banana.png"},
-    {"word": "Car", "image": "assets/car.png"},
-    {"word": "Dog", "image": "assets/dog.png"},
+    // أشياء
+    {"word": "Chair", "image": "assets/chair.jpg"},
+    {"word": "Table", "image": "assets/table.jpg"},
+    {"word": "Pencil", "image": "assets/pencil.jpg"},
+    {"word": "Book", "image": "assets/book.jpg"},
+    {"word": "Bottle", "image": "assets/bottle.jpg"},
+
+    // حيوانات
+    {"word": "Lion", "image": "assets/lion.png"},
+    {"word": "Bird", "image": "assets/bird.jpg"},
+    {"word": "Horse", "image": "assets/horse.jpg"},
+    {"word": "Monkey", "image": "assets/monkey.jpg"},
+    {"word": "Tiger", "image": "assets/tiger.jpg"},
+
+    // أفعال
+    {"word": "Run", "image": "assets/run.jpg"},
+    {"word": "Jump", "image": "assets/jump.jpg"},
+    {"word": "Eat", "image": "assets/eat.jpg"},
+    {"word": "Sleep", "image": "assets/sleep.jpg"},
+    {"word": "Drink", "image": "assets/drink.jpg"},
+
+    // فاكهة
+    {"word": "Banana", "image": "assets/banana.jpg"},
+    {"word": "Orange", "image": "assets/orange.jpg"},
+    {"word": "Grapes", "image": "assets/grapes.jpg"},
+    {"word": "Pineapple", "image": "assets/pineapple.jpg"},
+    {"word": "Strawberry", "image": "assets/strawberry.jpg"},
+
+    // أجزاء الجسم
+    {"word": "Head", "image": "assets/head.jpg"},
+    {"word": "Hand", "image": "assets/hand.jpg"},
+    {"word": "Leg", "image": "assets/feets.jpg"},
+    {"word": "Eye", "image": "assets/eye.jpg"},
+    {"word": "Mouth", "image": "assets/mouth.jpg"},
   ];
 
   int currentIndex = 0; // الفهرس الحالي للكلمة
@@ -108,6 +138,7 @@ class _WordLearningScreenState extends State<WordLearningScreen>
     String image = words[currentIndex]['image']!;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('تعلم الكلمات'),
       ),
