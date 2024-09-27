@@ -20,30 +20,27 @@ class _SentencesLearningScreenState extends State<SentencesLearningScreen>
   late Animation<double> _fadeInAnimation;
 
   List<Map<String, String>> sentences = [
-    {"sentence": "I have a cat.", "translation": "لدي قطة"},
-    {"sentence": "The sun is bright.", "translation": "الشمس مشرقة"},
+    {"sentence": "I have a cat", "translation": "لدي قطة"},
+    {"sentence": "The sun is bright", "translation": "الشمس مشرقة"},
     {
-      "sentence": "She likes to read books.",
+      "sentence": "She likes to read books",
       "translation": "هي تحب قراءة الكتب"
     },
-    {"sentence": "He is playing with a ball.", "translation": "هو يلعب بالكرة"},
+    {"sentence": "He is playing with a ball", "translation": "هو يلعب بالكرة"},
     {
-      "sentence": "We are going to the park.",
+      "sentence": "We are going to the park",
       "translation": "نحن ذاهبون إلى الحديقة"
     },
-    {"sentence": "The sky is blue.", "translation": "السماء زرقاء"},
-    {"sentence": "They are eating lunch.", "translation": "هم يتناولون الغداء"},
-    {"sentence": "The dog is barking.", "translation": "الكلب ينبح"},
-    {"sentence": "I can jump high.", "translation": "أستطيع القفز عالياً"},
-    {
-      "sentence": "It is raining outside.",
-      "translation": "إنها تمطر في الخارج"
-    },
-    {"sentence": "She has a red hat.", "translation": "لديها قبعة حمراء"},
-    {"sentence": "The bird is singing.", "translation": "العصفور يغني"},
-    {"sentence": "He is riding a bike.", "translation": "هو يركب الدراجة"},
-    {"sentence": "We are happy today.", "translation": "نحن سعداء اليوم"},
-    {"sentence": "The tree is tall.", "translation": "الشجرة طويلة"},
+    {"sentence": "The sky is blue", "translation": "السماء زرقاء"},
+    {"sentence": "They are eating lunch", "translation": "هم يتناولون الغداء"},
+    {"sentence": "The dog is barking", "translation": "الكلب ينبح"},
+    {"sentence": "I can jump high", "translation": "أستطيع القفز عالياً"},
+    {"sentence": "It is raining outside", "translation": "إنها تمطر في الخارج"},
+    {"sentence": "She has a red hat", "translation": "لديها قبعة حمراء"},
+    {"sentence": "The bird is singing", "translation": "العصفور يغني"},
+    {"sentence": "He is riding a bike", "translation": "هو يركب الدراجة"},
+    {"sentence": "We are happy today", "translation": "نحن سعداء اليوم"},
+    {"sentence": "The tree is tall", "translation": "الشجرة طويلة"},
   ];
 
   int currentIndex = 0;
@@ -82,9 +79,13 @@ class _SentencesLearningScreenState extends State<SentencesLearningScreen>
     if (available) {
       setState(() => isListening = true);
       speechToText!.listen(onResult: (result) {
-        setState(() {
-          feedback = _checkPronunciation(result.recognizedWords);
-        });
+        if (result.finalResult) {
+          // Check if the user has finished speaking
+          setState(() {
+            feedback = _checkPronunciation(result.recognizedWords);
+            _stopListening(); // Stop listening after the final result
+          });
+        }
       });
     } else {
       setState(() => isListening = false);

@@ -157,7 +157,7 @@ class _LettersLearningScreenState extends State<LettersLearningScreen>
   // نطق الحرف والكلمة المرتبطة به باستخدام TTS
   Future<void> _speak(String letter, String word) async {
     await flutterTts!.setLanguage("en-US");
-    await flutterTts!.setSpeechRate(0.5); // ضبط سرعة النطق
+    await flutterTts!.setSpeechRate(0.4); // ضبط سرعة النطق
     await flutterTts!.speak("$letter for $word"); // نطق الحرف والكلمة
   }
 
@@ -166,11 +166,15 @@ class _LettersLearningScreenState extends State<LettersLearningScreen>
     bool available = await speechToText!.initialize();
     if (available) {
       setState(() => isListening = true);
-      speechToText!.listen(onResult: (result) {
-        setState(() {
-          feedback = _checkPronunciation(result.recognizedWords);
-        });
-      });
+      speechToText!.listen(
+        onResult: (result) {
+          setState(() {
+            feedback = _checkPronunciation(result.recognizedWords);
+          });
+        },
+        listenFor: const Duration(seconds: 5), // Increase the listening time
+        pauseFor: const Duration(seconds: 2), // Add a pause to allow completion
+      );
     } else {
       setState(() => isListening = false);
     }
@@ -184,7 +188,8 @@ class _LettersLearningScreenState extends State<LettersLearningScreen>
 
   // مقارنة النطق بالنطق الصحيح
   String _checkPronunciation(String spokenWord) {
-    String correctWord = letters[currentIndex]['word']!;
+    String correctWord =
+        '${letters[currentIndex]['letter']!} for ${letters[currentIndex]['word']!}';
     if (spokenWord.toLowerCase() == correctWord.toLowerCase()) {
       _stopListening();
       return "أحسنت! نطقك صحيح.";
